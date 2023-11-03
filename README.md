@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# react-auto-scroll-container
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ReactAutoScrollContainer is a React component designed to automatically scroll to the bottom when new content is added and the user is already at the container's bottom. This feature is especially handy for real-time or dynamic content updates.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+You can install `react-auto-scroll-container` using npm:
 
-### `npm start`
+```bash
+npm i react-auto-scroll-container
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Example
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[StackBlitz](https://stackblitz.com/edit/stackblitz-starters-jklubu?file=src%2FApp.tsx)
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```jsx
+import React from 'react';
+import AutoScrollContainer from 'react-auto-scroll-container';
 
-### `npm run build`
+const App = () => {
+  return (
+    <AutoScrollContainer percentageThreshold={10} style={{/* Your inline styles goes here */}} className="Your css classes goes here">
+      {/* Your dynamic content goes here */}
+    </AutoScrollContainer>
+  );
+};
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export default App;
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Props
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **`children`** (`React.ReactNode`): The content that will be wrapped by the AutoScrollContainer.
 
-### `npm run eject`
+- **`percentageThreshold`** (`number`): The threshold (in percentage) for triggering automatic scrolling when the user is near the top of the container. For example, a value of `10` would trigger scrolling when the user has scrolled to 90% of the container.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **`className`** (`string`, optional): Additional CSS class names to apply to the AutoScrollContainer component.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **`style`** (`CSSProperties`, optional): Additional inline styles to apply to the AutoScrollContainer component.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **`behavior`** (`string`, optional): Custom scrolling behavior for the container. This should be a valid CSS `scroll-behavior` value (e.g., `"auto"`, `"smooth"`).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
