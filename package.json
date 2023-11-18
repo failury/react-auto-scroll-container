@@ -10,22 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/failury/react-auto-scroll-container.git"
   },
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.60",
-    "@types/react": "^18.2.34",
-    "@types/react-dom": "^18.2.14",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^5.2.2",
-    "web-vitals": "^2.1.4"
-  },
   "peerDependencies": {
-    "react": ">=17"
+    "react": ">=17",
+    "react-dom": ">=17"
   },
   "files": [
     "dist",
@@ -52,5 +39,15 @@
       "react-app/jest"
     ]
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/jest": "^29.5.8",
+    "@types/node": "^20.9.1",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "typescript": "^5.2.2"
+  }
 }
