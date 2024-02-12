@@ -18,7 +18,7 @@ npm i react-auto-scroll-container
 
 ```jsx
 import React from 'react';
-import AutoScrollContainer from 'react-auto-scroll-container';
+import {AutoScrollContainer} from 'react-auto-scroll-container';
 
 const App = () => {
   return (
