@@ -44,4 +44,3 @@ var AutoScrollContainer = function (_a) {
     return ((0, jsx_runtime_1.jsxs)("div", { style: tslib_1.__assign(tslib_1.__assign({}, style), { overflowY: "auto" }), className: className, ref: containerRef, onScroll: handleOnScroll, children: [children, (0, jsx_runtime_1.jsx)("div", { ref: endRef })] }));
 };
 exports.AutoScrollContainer = AutoScrollContainer;
-//# sourceMappingURL=react-auto-scroll-container.js.map

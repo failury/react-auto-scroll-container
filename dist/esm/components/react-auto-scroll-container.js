@@ -40,4 +40,3 @@ export var AutoScrollContainer = function (_a) {
     }, [children]);
     return (_jsxs("div", { style: __assign(__assign({}, style), { overflowY: "auto" }), className: className, ref: containerRef, onScroll: handleOnScroll, children: [children, _jsx("div", { ref: endRef })] }));
 };
-//# sourceMappingURL=react-auto-scroll-container.js.map
