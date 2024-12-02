@@ -1,7 +1,7 @@
 {
   "name": "react-auto-scroll-container",
   "author": "Ruifeng Zhang",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "ReactAutoScrollContainer is a React component designed to automatically scroll to the bottom when new content is added and the user is already at the container's bottom. This feature is especially handy for real-time or dynamic content updates.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -46,7 +46,7 @@
     "@testing-library/user-event": "^14.5.1",
     "@types/jest": "^29.5.8",
     "@types/node": "^20.9.1",
-    "@types/react": "^18.2.37",
+    "@types/react": "^18.3.12",
     "@types/react-dom": "^18.2.15",
     "typescript": "^5.2.2"
   },

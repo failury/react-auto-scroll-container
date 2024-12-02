@@ -1,42 +1,66 @@
 import { __assign } from "tslib";
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React from "react";
-export var AutoScrollContainer = function (_a) {
-    var children = _a.children, percentageThreshold = _a.percentageThreshold, style = _a.style, className = _a.className, _b = _a.behavior, behavior = _b === void 0 ? "auto" : _b;
+import React, { useCallback, useEffect } from "react";
+var delay = function (fn, ms) { return setTimeout(fn, ms); };
+export var AutoScrollContainer = React.forwardRef(function (props, ref) {
+    var children = props.children, style = props.style, className = props.className, _a = props.behavior, behavior = _a === void 0 ? "auto" : _a, _b = props.active, active = _b === void 0 ? false : _b, _c = props.forceScroll, forceScroll = _c === void 0 ? false : _c, _d = props.overflowY, overflowY = _d === void 0 ? "auto" : _d, _e = props.percentageThreshold, percentageThreshold = _e === void 0 ? 20 : _e, _f = props.as, Component = _f === void 0 ? "div" : _f;
     var containerRef = React.useRef(null);
     var endRef = React.useRef(null);
-    var _c = React.useState(true), isUserAtBottom = _c[0], setIsUserAtBottom = _c[1];
-    var _d = React.useState(-1), previousHeight = _d[0], setPreviousHeight = _d[1];
-    var _e = React.useState(0), heightChange = _e[0], setHeightChange = _e[1];
-    React.useEffect(function () {
-        var _a;
-        if (isUserAtBottom && heightChange)
-            (_a = endRef.current) === null || _a === void 0 ? void 0 : _a.scrollIntoView({ behavior: behavior });
-    }, [heightChange]);
-    var handleOnScroll = function () {
-        if (!containerRef.current)
-            return;
-        var _a = containerRef.current, scrollTop = _a.scrollTop, scrollHeight = _a.scrollHeight, clientHeight = _a.clientHeight;
-        if (scrollTop + clientHeight >=
-            scrollHeight - scrollHeight * (percentageThreshold / 100)) {
-            setIsUserAtBottom(true);
+    var _g = React.useState(false), isScrollingUp = _g[0], setIsScrollingUp = _g[1];
+    React.useImperativeHandle(ref, function () { return containerRef.current; });
+    var _h = React.useState(active), delayedActive = _h[0], setDelayedActive = _h[1];
+    useEffect(function () {
+        if (active) {
+            setDelayedActive(true);
         }
         else {
-            setIsUserAtBottom(false);
+            delay(function () {
+                setDelayedActive(false);
+            }, 1);
         }
-    };
-    React.useEffect(function () {
+    }, [active]);
+    useEffect(function () {
+        var container = containerRef.current;
+        if (forceScroll) {
+            delay(function () {
+                var _a;
+                containerRef.current &&
+                    containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
+                (_a = endRef.current) === null || _a === void 0 ? void 0 : _a.scrollIntoView({ behavior: "smooth" });
+            }, 5);
+            return;
+        }
+        if (!delayedActive || !container || isScrollingUp)
+            return;
+        delay(function () {
+            var _a;
+            containerRef.current &&
+                containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
+            (_a = endRef.current) === null || _a === void 0 ? void 0 : _a.scrollIntoView({ behavior: "instant" });
+        }, 5);
+    }, [forceScroll, active, children, behavior, isScrollingUp]);
+    var handleOnWheel = useCallback(function (event) {
         var container = containerRef.current;
         if (!container)
             return;
-        var currentHeight = container.scrollHeight;
-        if (previousHeight !== null && currentHeight !== previousHeight) {
-            setHeightChange(currentHeight - previousHeight);
+        var scrollTop = container.scrollTop, scrollHeight = container.scrollHeight, clientHeight = container.clientHeight;
+        var thresholdInPixels = (scrollHeight - clientHeight) * (percentageThreshold / 100);
+        var isNearBottom = scrollHeight - scrollTop - clientHeight < thresholdInPixels;
+        if (event.deltaY < 0) {
+            setIsScrollingUp(true);
         }
-        else {
-            setHeightChange(0);
+        else if (isNearBottom) {
+            setIsScrollingUp(false);
         }
-        setPreviousHeight(currentHeight);
-    }, [children]);
-    return (_jsxs("div", { style: __assign(__assign({}, style), { overflowY: "auto" }), className: className, ref: containerRef, onScroll: handleOnScroll, children: [children, _jsx("div", { ref: endRef })] }));
-};
+    }, [percentageThreshold]);
+    useEffect(function () {
+        var container = containerRef.current;
+        if (!container)
+            return;
+        container.addEventListener("wheel", handleOnWheel);
+        return function () {
+            container.removeEventListener("wheel", handleOnWheel);
+        };
+    }, [handleOnWheel]);
+    return (_jsxs(Component, { className: className, ref: containerRef, style: __assign(__assign({}, style), { overflowY: overflowY }), children: [children, _jsx("div", { ref: endRef })] }));
+});
