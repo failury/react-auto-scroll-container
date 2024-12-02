@@ -33,15 +33,34 @@ export default App;
 
 ## Props
 
-- **`children`** (`React.ReactNode`): The content that will be wrapped by the AutoScrollContainer.
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | Required | The content to be displayed within the scroll container |
+| `percentageThreshold` | `number` | `20` | Defines the percentage of container height from bottom where auto-scrolling triggers. Lower values mean scrolling triggers closer to the bottom |
+| `className` | `string` | `undefined` | CSS class name(s) to apply to the container |
+| `style` | `CSSProperties` | `undefined` | Inline styles to apply to the container |
+| `behavior` | `string` | `"auto"` | Scroll behavior. Can be "auto", "smooth", or "instant" |
+| `active` | `boolean` | `false` | When true, enables auto-scrolling when new content is added |
+| `forceScroll` | `boolean` | `false` | When true, forces scrolling to bottom regardless of user's scroll position |
+| `overflowY` | `"auto" \| "scroll" \| "hidden" \| "visible" \| "inherit"` | `"auto"` | Controls vertical overflow behavior of the container |
+| `as` | `React.ElementType` | `"div"` | The HTML element or component to render as the container |
 
-- **`percentageThreshold`** (`number`): The threshold (in percentage) for triggering automatic scrolling when the user is near the top of the container. For example, a value of `10` would trigger scrolling when the user has scrolled to 90% of the container.
+### Example Usage with Props
 
-- **`className`** (`string`, optional): Additional CSS class names to apply to the AutoScrollContainer component.
+```jsx
+import React from 'react';
+import {AutoScrollContainer} from 'react-auto-scroll-container';
 
-- **`style`** (`CSSProperties`, optional): Additional inline styles to apply to the AutoScrollContainer component.
+const App = () => {
+  return (
+    <AutoScrollContainer percentageThreshold={10} style={{/* Your inline styles goes here */}} className="Your css classes goes here">
+      {/* Your dynamic content goes here */}
+    </AutoScrollContainer>
+  );
+};
 
-- **`behavior`** (`string`, optional): Custom scrolling behavior for the container. This should be a valid CSS `scroll-behavior` value (e.g., `"auto"`, `"smooth"`).
+export default App;
+```
 
 ## License
 
