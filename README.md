@@ -9,6 +9,7 @@ You can install `react-auto-scroll-container` using npm:
 ```bash
 npm i react-auto-scroll-container
 ```
+![Screen Recording 2024-12-04 at 10 22 25](https://github.com/user-attachments/assets/f494790e-5881-49d3-b901-565cc0aa809a)
 
 ## Example
 
